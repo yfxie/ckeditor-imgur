@@ -41,7 +41,7 @@ That's all. Your CKEditor have a imgur button in insert group.
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/ckeditor-imgur/fork )
+1. Fork it ( https://github.com/yfxie/ckeditor-imgur/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
