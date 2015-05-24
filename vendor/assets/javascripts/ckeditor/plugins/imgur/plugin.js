@@ -21,7 +21,7 @@
 
                 editor.ui.addButton( 'Imgur',
                     {
-                        label : "Imgur",
+                        label : editor.lang.imgur.label,
                         toolbar : 'insert',
                         command : 'imgur',
                         icon : this.path + 'images/icon.png'
