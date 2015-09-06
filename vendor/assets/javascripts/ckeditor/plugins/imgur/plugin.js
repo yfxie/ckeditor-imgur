@@ -4,9 +4,9 @@
             lang: ['zh', 'en'],
             init: function( editor )
             {
-                ClientId = editor.config.imgurClientId;
-                if(!ClientId)
-                    alert(editor.lang.imgur.clientIdMissing);
+                ClientID = editor.config.imgurClientID;
+                if(!ClientID)
+                    alert(editor.lang.imgur.ClientIDMissing);
 
                 var count = 0;
                 var $placeholder = $("<div></div>").css({
@@ -38,7 +38,7 @@
                                 form.append('image', file);
                                 $.ajax({
                                     url: 'https://api.imgur.com/3/image',
-                                    headers: { Authorization: "Client-ID " + ClientId },
+                                    headers: { Authorization: "Client-ID " + ClientID },
                                     type: 'POST',
                                     data: form,
                                     cache: false,
