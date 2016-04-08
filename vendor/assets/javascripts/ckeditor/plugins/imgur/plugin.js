@@ -73,6 +73,91 @@
                     }
                 });
 
+                editor.on( 'paste', function( evt ) {
+                
+            		var data = evt.data,
+        			// Prevent XSS attacks
+        			tempDoc = document.implementation.createHTMLDocument( '' ),
+        			temp = new CKEDITOR.dom.element( tempDoc.body ),
+        			imgs, img, i;
+        			
+        			// For Mozilla 
+        			if (data && data.dataValue && typeof $(data.dataValue).attr("src") != "undefined") {
+        			    count++;
+        			    var dataURL = $(data.dataValue).attr("src");
+                    
+                        dataURL = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+
+    			        var form = new FormData();
+                        form.append('image', dataURL);
+                        
+                        $.ajax({
+                            url: 'https://api.imgur.com/3/image',
+                            headers: { Authorization: "Client-ID " + editor.config.imgurClientID },
+                            type: 'POST',
+                            data: form,
+                            cache: false,
+                            contentType: false,
+                            processData: false
+                        }).always(function(jqXHR){
+                            count--;
+                            $placeholder.text(count + editor.lang.imgur.uploading).toggle(count != 0);
+        
+                            if(jqXHR.status != 200 ) {
+                                res = $.parseJSON(jqXHR.responseText);
+                            }else{
+                                res = jqXHR;
+                            }
+        
+                            if(res.data.error) {
+                                alert(editor.lang.imgur.failToUpload + res.data.error);
+                            } else {
+                                content = '<img src="' + res.data.link +'"/>';
+                                var element = CKEDITOR.dom.element.createFromHtml(content);
+                                editor.insertElement(element);
+                            }
+                        });
+                        $placeholder.text(count + editor.lang.imgur.uploading).fadeIn();
+        			     
+        			    return false;
+        			}
+        			                            
+                    // For Chrome
+    	 			for ( i = 0; i < evt.data.dataTransfer.getFilesCount(); i++ ) {
+                        count++;
+    	 				file = evt.data.dataTransfer.getFile( i );
+                        form = new FormData();
+                        form.append('image', file);
+                        $.ajax({
+                            url: 'https://api.imgur.com/3/image',
+                            headers: { Authorization: "Client-ID " + editor.config.imgurClientID },
+                            type: 'POST',
+                            data: form,
+                            cache: false,
+                            contentType: false,
+                            processData: false
+                        }).always(function(jqXHR){
+                            count--;
+                            $placeholder.text(count + editor.lang.imgur.uploading).toggle(count != 0);
+        
+                            if(jqXHR.status != 200 ) {
+                                res = $.parseJSON(jqXHR.responseText);
+                            }else{
+                                res = jqXHR;
+                            }
+        
+                            if(res.data.error) {
+                                alert(editor.lang.imgur.failToUpload + res.data.error);
+                            } else {
+                                content = '<img src="' + res.data.link +'"/>';
+                                var element = CKEDITOR.dom.element.createFromHtml(content);
+                                editor.insertElement(element);
+                            }
+                        });
+                        $placeholder.text(count + editor.lang.imgur.uploading).fadeIn();
+    	 			}      
+                });
+                
             }
         });
 })();
