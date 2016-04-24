@@ -81,7 +81,7 @@
                     temp = new CKEDITOR.dom.element( tempDoc.body ),
                     imgs, img, i;
 
-                    if (data && data.dataValue && typeof $(data.dataValue).attr("src") != "undefined") {
+                    if (data && data.dataValue && data.dataValue.startsWith("<img")) {
                         count++;
                         var dataURL = $(data.dataValue).attr("src");
 
@@ -153,7 +153,9 @@
                             }
                         });
                         $placeholder.text(count + editor.lang.imgur.uploading).fadeIn();
+                        return false;
                      }
+                     return true;
                 });
                 
             }
