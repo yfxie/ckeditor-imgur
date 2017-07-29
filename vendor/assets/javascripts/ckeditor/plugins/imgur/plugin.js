@@ -24,7 +24,7 @@
                         label : editor.lang.imgur.label,
                         toolbar : 'insert',
                         command : 'imgur',
-                        icon : this.path + 'images/icon.png'
+                        icon : this.path + 'images/icon.svg'
                     });
 
                 editor.addCommand( 'imgur', {
