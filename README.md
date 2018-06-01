@@ -29,7 +29,7 @@ CKEDITOR.editorConfig = function (config) {
     ...
     config.extraPlugins = 'imgur';
     // Get your client-id from https://api.imgur.com/oauth2/addclient
-    config.imgurClientID = '55d8ba08326ec75';
+    config.imgurClientId = '55d8ba08326ec75';
     ...
 };
 ```
