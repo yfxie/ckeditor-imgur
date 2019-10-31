@@ -19,6 +19,11 @@ And then execute:
 Or install it yourself as:
 
     $ gem install ckeditor-imgur
+    
+This plugin requires jquery, if your website is without it, Add the following to pages with editors:
+```
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+```
 
 ## Usage
 
@@ -29,7 +34,7 @@ CKEDITOR.editorConfig = function (config) {
     ...
     config.extraPlugins = 'imgur';
     // Get your client-id from https://api.imgur.com/oauth2/addclient
-    config.imgurClientId = '55d8ba08326ec75';
+    config.imgurClientID = '55d8ba08326ec75';
     ...
 };
 ```
